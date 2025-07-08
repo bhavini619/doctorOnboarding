@@ -1,4 +1,4 @@
-import { getInterestedDoctors, getDoctorProfile } from "../service/invitedDoctorService.js";
+import { getInterestedDoctors, getDoctorProfile,updateDoctorService } from "../service/invitedDoctorService.js";
 import { successResponse, errorResponse } from '../utils/response.js';
 
 async function getInterestedDoctorsController(req, res) {
@@ -30,4 +30,28 @@ async function getDoctorProfileController(req, res) {
     }
 }
 
-export { getInterestedDoctorsController, getDoctorProfileController };
+async function updateDoctorController(req, res) {
+    console.log("updateDoctorController called with body:", req.body);
+    try {
+    const { doctor_id, ...updates } = req.body;
+    console.log("doctor_id", doctor_id);
+
+    if (!doctor_id) {
+      return res.status(400).json(
+        errorResponse('doctor_id is required', '', 400, 'MISSING_ID')
+      );
+    }
+
+    const updated = await updateDoctorService(doctor_id, updates);
+
+    return res.status(200).json(
+      successResponse(updated, 'Doctor profile updated successfully', 200)
+    );
+  } catch (err) {
+    return res.status(500).json(
+      errorResponse('Failed to update doctor profile', err.message, 500, 'DB_ERROR')
+    );
+  }
+}
+
+export { getInterestedDoctorsController, getDoctorProfileController, updateDoctorController };

@@ -29,4 +29,12 @@ async function getDoctorProfile(doctor_id) {
   return doctor;
 }
 
-export { getInterestedDoctors, getDoctorProfile };
+ async function updateDoctorService(doctorId, updates) {
+  const updatedDoctor = await prisma.interestedDoctor.update({
+    where: { id: doctorId },
+    data: updates
+  });
+  return updatedDoctor;
+}
+
+export { getInterestedDoctors, getDoctorProfile,updateDoctorService };

@@ -24,7 +24,6 @@ export async function saveWebhookPayload(data) {
     throw new Error('Doctor with this email or contact number already exists');
   }
 
-
   // Create entry in the InterestedDoctor table
   const result = await prisma.interestedDoctor.create({
     data: {name,email,contactno,country,city,state,postalcode }
