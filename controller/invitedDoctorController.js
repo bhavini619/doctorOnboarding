@@ -15,7 +15,7 @@ async function getInterestedDoctorsController(req, res) {
     }
 
 };
-async function getDoctorProfileController(req, res) {
+async function getInterestedDoctorProfileController(req, res) {
     const doctorId = req.query.doctor_id;
 
     try {
@@ -54,4 +54,4 @@ async function updateDoctorController(req, res) {
   }
 }
 
-export { getInterestedDoctorsController, getDoctorProfileController, updateDoctorController };
+export { getInterestedDoctorsController, getInterestedDoctorProfileController, updateDoctorController };

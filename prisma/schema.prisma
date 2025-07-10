@@ -25,3 +25,32 @@ model InterestedDoctor {
   postalcode  String?
   createdAt   DateTime @default(now())
 }
+
+model Doctor {
+  id              Int       @id @default(autoincrement())
+  name            String
+  specialization  String
+  email           String    @unique
+  phone           String    @unique
+ 
+
+  status          DoctorStatus     @default(IN_PROGRESS)
+  interactionMode InteractionMode  @default(ONLINE)
+
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
+}
+
+enum DoctorStatus {
+  VERIFIED
+  IN_PROGRESS
+  DECLINED
+}
+
+enum InteractionMode {
+  ONLINE
+  INCLINIC
+  HOME
+  HOSPITAL
+}
+
